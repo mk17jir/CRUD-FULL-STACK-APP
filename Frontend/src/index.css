@@ -1,0 +1,46 @@
+@import "tailwindcss";
+@layer components {
+ 
+  .input-box {
+    @apply w-full text-sm bg-transparent border border-gray-300 rounded px-5 py-3 mb-3 outline-none;
+  }
+  .btn {
+    @apply w-full bg-blue-500 text-white py-3 rounded-md hover:bg-blue-400 transition duration-300 outline-none mb-2 ;
+  }
+  .icon-btn {
+    @apply mt-5  text-slate-400 hover:text-blue-500  cursor-pointer;
+  }
+  .input-label {
+    @apply text-xl font-semibold mt-3 text-slate-500;
+  }
+}
+
+/* Chrome, Edge, Safari */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear,
+input[type="password"]::-webkit-credentials-auto-fill-button,
+input[type="password"]::-webkit-clear-button,
+input[type="password"]::-webkit-inner-spin-button,
+input[type="password"]::-webkit-contacts-auto-fill-button {
+  display: none !important;
+  appearance: none;
+}
+
+/* Safari specifically */
+input[type="password"] {
+  -webkit-text-security: disc;
+}
+
+/* Chrome, Edge, Safari — remove native search UI */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none !important;
+  -webkit-appearance: none;
+}
+
+/* Firefox */
+input[type="search"] {
+  appearance: textfield;
+}

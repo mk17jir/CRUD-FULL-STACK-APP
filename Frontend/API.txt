@@ -1,12 +1,1 @@
-USER APIs
 
-1-SIGNUP-API     http://localhost:3001/api/users/signup
-2-LOGIN-API      http://localhost:3001/api/users/login
-2-GET-USER-API   http://localhost:3001/api/users/get-user
-
-TODOLIST APIs
-
-1-CREATE-TODOLIST-API  http://localhost:3001/api/todos/create-todolist
-2-GET-ALL-TODOLIST-API http://localhost:3001/api/todos/get-all-todolist
-2-UPDATE-TODOLIST-API  http://localhost:3001/api/todos/update-todolist
-2-DELETE-TODOLIST-API  http://localhost:3001/api/todos/delete-todolist

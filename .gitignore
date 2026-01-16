@@ -10,3 +10,6 @@ frontend/build
 
 # Environment files
 *.env
+
+# Ignore frontend API.txt file
+/frontend/API.txt

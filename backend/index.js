@@ -14,7 +14,15 @@ import cors from 'cors';
 
 dotenv.config();
 const app = express();
-app.use(cors());
+import cors from "cors";
+
+// Allow only your frontend to access backend
+app.use(cors({
+  origin: "https://crud-full-stack-app-todo-6htdmfi80-mk17jirs-projects.vercel.app",
+  credentials: true
+}));
+
+
 app.use(express.json());
 
 // Simple logger

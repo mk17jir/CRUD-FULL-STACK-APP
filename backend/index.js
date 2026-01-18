@@ -9,12 +9,9 @@ import cors from 'cors';
 
 // Enable CORS for all routes
 
-
-
-
 dotenv.config();
 const app = express();
-import cors from "cors";
+
 
 // Allow only your frontend to access backend
 

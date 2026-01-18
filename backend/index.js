@@ -1,4 +1,3 @@
-// index.js
 import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
@@ -12,21 +11,33 @@ import cors from 'cors';
 dotenv.config();
 const app = express();
 
-
-// Allow only your frontend to access backend
-
 const allowedOrigins = [
-  process.env.FRONTEND_URL,
-  "http://localhost:5173"
+  "http://localhost:5173",
+  "https://crud-full-stack-app-zxcw.vercel.app", 
+  "https://crud-full-stack-app-zxcw-git-main-mk17jirs-projects.vercel.app",
 ];
 
-
-
 app.use(cors({
-  origin: allowedOrigins,     
-  credentials: true,            
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = `The CORS policy for this site does not allow access from the specified Origin.`;
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
+  credentials: true,
+  methods: ["GET","POST","PUT","DELETE","OPTIONS"],
+  allowedHeaders: ["Content-Type","Authorization"]
 }));
 
+
+app.options("*", cors({
+  origin: allowedOrigins,
+  credentials: true,
+  methods: ["GET","POST","PUT","DELETE","OPTIONS"],
+  allowedHeaders: ["Content-Type","Authorization"]
+}));
 
 
 
@@ -49,10 +60,6 @@ app.get('/', Auth, (req, res) => {
   res.send('Welcome to the API');
 });
 
-// Health check
-app.get("/api/health", (req, res) => {
-  res.json({ status: "OK" });
-});
 
 const PORT = process.env.PORT; 
 mongoose

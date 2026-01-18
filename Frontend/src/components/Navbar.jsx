@@ -82,14 +82,16 @@ const Navbar = () => {
         )}
       </ul>
 
-      <div className="md:flex hidden">
-        <Search
-          onChange={(e) => setSearchQuery(e.target.value)}
-          onClearSearch={onClearSearch}
-          value={searchQuery}
-          handleSearch={handleSearch}
-        />
-      </div>
+      {user && (
+  <div className="w-full md:w-auto">
+    <Search
+      onChange={(e) => setSearchQuery(e.target.value)}
+      onClearSearch={onClearSearch}
+      value={searchQuery}
+      handleSearch={handleSearch}
+    />
+  </div>
+)}
 
       <div>
         <Profile userData={userData} />

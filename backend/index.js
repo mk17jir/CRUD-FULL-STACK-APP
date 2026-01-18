@@ -30,7 +30,7 @@ app.use(cors({
 }));
 
 // Handle preflight OPTIONS requests automatically
-app.options("*", cors());
+
 
 
 app.use(express.json());

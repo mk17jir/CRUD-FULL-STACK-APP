@@ -1,6 +1,6 @@
 import axios from "axios";
 
-// ✅ Use environment variable if available, fallback to localhost for dev
+// Use environment variable for API URL
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001/api";
 
 const AxiosInstance = axios.create({
@@ -11,7 +11,7 @@ const AxiosInstance = axios.create({
   },
 });
 
-// ✅ Attach JWT token from localStorage to all requests
+// Attach token if exists
 AxiosInstance.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("accessToken");

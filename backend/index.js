@@ -17,11 +17,16 @@ const app = express();
 import cors from "cors";
 
 // Allow only your frontend to access backend
-app.use(cors({
-  origin: "https://crud-full-stack-app-todo-6htdmfi80-mk17jirs-projects.vercel.app",
-  credentials: true
-}));
 
+const allowedOrigins = [
+  "https://crud-full-stack-app-todo-c6bxwiuxo-mk17jirs-projects.vercel.app/",
+  "http://localhost:5173" // for local frontend dev
+];
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true, // allows sending cookies / auth headers
+}));
 
 app.use(express.json());
 

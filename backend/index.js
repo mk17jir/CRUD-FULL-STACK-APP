@@ -1,3 +1,4 @@
+// index.js
 import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
@@ -6,44 +7,46 @@ import todoRoutes from './routes/todoRoutes.js';
 import Auth from './Authentication.js';
 import cors from 'cors';
 
+// Enable CORS for all routes
+
 dotenv.config();
 const app = express();
 
-/* =========================
-   CORS
-========================= */
+
+// Allow only your frontend to access backend
+
 const allowedOrigins = [
   process.env.FRONTEND_URL,
   "http://localhost:5173"
 ];
 
+
+
 app.use(cors({
-  origin: allowedOrigins,
-  credentials: true,
-  methods: ["GET","POST","PUT","DELETE","OPTIONS"],
+  origin: allowedOrigins,     // local dev
+  credentials: true,            // allow cookies / auth headers
+  methods: ["GET","POST","PUT","DELETE",],
   allowedHeaders: ["Content-Type","Authorization"]
 }));
 
-app.options("*", cors()); // handle preflight requests
+// Handle preflight OPTIONS requests automatically
+app.options("*", cors());
 
-/* =========================
-   MIDDLEWARE
-========================= */
+
 app.use(express.json());
 
 // Simple logger
 app.use((req, res, next) => {
-  console.log(`[${new Date().toISOString()}] ${req.method} ${req.path}`);
+  console.log(req.method, req.path);
   next();
 });
 
-/* =========================
-   ROUTES
-========================= */
+
+
+// API routes
 app.use('/api', userRoutes);
 app.use('/api', todoRoutes);
 
-// Protected test route
 app.get('/', Auth, (req, res) => {
   res.send('Welcome to the API');
 });
@@ -53,16 +56,12 @@ app.get("/api/health", (req, res) => {
   res.json({ status: "OK" });
 });
 
-/* =========================
-   DATABASE & SERVER
-========================= */
-const PORT = process.env.PORT || 5000;
-
+const PORT = process.env.PORT; 
 mongoose
   .connect(process.env.MONGODB_URL)
   .then(() => {
     app.listen(PORT, () => {
-      console.log(`🚀 Server running on port ${PORT}`);
+      console.log(`🚀 Server running on http://localhost:${PORT}`);
       console.log('✅ MongoDB connected successfully');
     });
   })
@@ -70,3 +69,4 @@ mongoose
     console.error('❌ MongoDB connection error:', err.message);
     process.exit(1);
   });
+

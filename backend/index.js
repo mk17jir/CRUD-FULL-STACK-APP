@@ -23,8 +23,8 @@ const allowedOrigins = [
 
 
 app.use(cors({
-  origin: allowedOrigins,     // local dev
-  credentials: true,            // allow cookies / auth headers
+  origin: allowedOrigins,     
+  credentials: true,            
   methods: ["GET","POST","PUT","DELETE",],
   allowedHeaders: ["Content-Type","Authorization"]
 }));

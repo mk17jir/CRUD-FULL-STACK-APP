@@ -19,14 +19,20 @@ import cors from "cors";
 // Allow only your frontend to access backend
 
 const allowedOrigins = [
-  "https://crud-full-stack-app-todo-c6bxwiuxo-mk17jirs-projects.vercel.app/",
-  "http://localhost:5173" // for local frontend dev
+  process.env.FRONTEND_URL,
+  "http://localhost:5173"
 ];
 
 app.use(cors({
-  origin: allowedOrigins,
-  credentials: true, // allows sending cookies / auth headers
-}));
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+}));  
 
 app.use(express.json());
 

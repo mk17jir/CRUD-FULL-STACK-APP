@@ -41,11 +41,16 @@ const Profile = ({ userData: propUserData }) => {
 
   return (
     <div className='flex items-center gap-4'>
-      {/* Use your original getProfileName logic */}
+      {/* Avatar with initials */}
       <div className='bg-gray-800 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold'>
         {getProfileName(userData.fullName)}
       </div>
-      <p className='md:text-xl font-medium'>{userData.fullName}</p>
+
+      {/* Full name hidden on mobile, shown on tablet+ */}
+      <p className='hidden md:block md:text-xl font-medium'>
+        {userData.fullName}
+      </p>
+
       <button
         className='text-slate-800 underline cursor-pointer'
         onClick={handleLogout}
